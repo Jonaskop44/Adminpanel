@@ -6,7 +6,7 @@ import * as IconTb from "react-icons/tb";
 import * as IconVsc from "react-icons/vsc";
 import Link from "next/link";
 import Image from "next/image";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 const navigation = [
   {
@@ -46,6 +46,12 @@ const classNames = (...classes: string[]) => {
 };
 
 const Sidebar = () => {
+  const session = useSession();
+
+  const handleSignOut = () => {
+    signOut({ callbackUrl: "/" });
+  };
+
   return (
     <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 pb-4 bg-white overflow-y-auto h-screen">
       <div className="flex items-center flex-shrink-0 px-4">
@@ -93,7 +99,7 @@ const Sidebar = () => {
                         item.current
                           ? "bg-gray-100 text-gray-900"
                           : "bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                        "group w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        "group w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-sky-600"
                       )}
                     >
                       <item.icon
@@ -165,7 +171,7 @@ const Sidebar = () => {
               : "bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900",
             "group w-full flex items-center pl-2 py-2 text-sm font-medium rounded-md"
           )}
-          onClick={() => signOut()}
+          onClick={handleSignOut}
         >
           <IconVsc.VscSignOut
             className={classNames(
@@ -176,7 +182,7 @@ const Sidebar = () => {
             )}
             aria-hidden="true"
           />
-          Sign out
+          Logout
         </button>
       </div>
     </div>

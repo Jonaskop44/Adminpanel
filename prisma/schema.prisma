@@ -16,3 +16,17 @@ model User {
   hashedPassword String?
   name String?
 }
+
+model Plugins {
+  id String @id @default(uuid())
+  name String
+  description String
+  license String
+}
+
+model Server {
+  id String @id @default(uuid())
+  name String
+  description String
+  license String
+}
