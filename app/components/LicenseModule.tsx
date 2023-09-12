@@ -1,6 +1,10 @@
-import { Fragment, useRef } from "react";
+import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import * as IconFa from "react-icons/fa";
+import LicenseInput from "./inputs/LicenseInput";
+import LicenseButton from "./buttons/LicenseButton";
 
 interface ModalProps {
   open: boolean;
@@ -11,6 +15,22 @@ interface ModalProps {
 
 const Model: React.FC<ModalProps> = ({ open, setOpen, title, description }) => {
   const cancelButtonRef = useRef(null);
+  const [isLoading, setLoading] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FieldValues>({
+    defaultValues: {
+      name: "",
+      description: "",
+    },
+  });
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setLoading(true);
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -68,26 +88,40 @@ const Model: React.FC<ModalProps> = ({ open, setOpen, title, description }) => {
                     <p className="text-sm text-gray-500">{description}</p>
                   </div>
                 </div>
-                <div className="flex justify-center items-center mt-10">
-                  <input type="text" placeholder="test1234" />
+                <div className="justify-center mt-10">
+                  <LicenseInput
+                    disabled={isLoading}
+                    id="name"
+                    label="Name"
+                    required={true}
+                  />
+                  <LicenseInput
+                    disabled={isLoading}
+                    id="description"
+                    label="Description"
+                    required={true}
+                  />
                 </div>
               </div>
               <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
-                <button
-                  type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
+                <LicenseButton
+                  disabled={isLoading}
                   onClick={() => setOpen(false)}
+                  fullWidth
+                  secondary
+                  style="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
                 >
-                  Deactivate
-                </button>
-                <button
-                  type="button"
-                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm"
+                  Create
+                </LicenseButton>
+                <LicenseButton
+                  disabled={isLoading}
                   onClick={() => setOpen(false)}
-                  ref={cancelButtonRef}
+                  fullWidth
+                  danger
+                  style="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:col-start-1 sm:text-sm"
                 >
                   Cancel
-                </button>
+                </LicenseButton>
               </div>
             </div>
           </Transition.Child>

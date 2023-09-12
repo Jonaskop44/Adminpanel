@@ -1,14 +1,25 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 const App = () => {
   const session = useSession();
 
+  useEffect(() => {
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      document.documentElement.style.overflow = "visible";
+    };
+  }, []);
+
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="text-4xl font-semibold">
-        <h1 className="text-gray-800">Login as {session.data?.user?.name}</h1>
+      <h1 className="text-4xl font-semibold text-gray-800">
+        Login as {session.data?.user?.name}
+      </h1>
+      <div className="absolute bottom-2 right-2 text-gray-500 text-sm">
+        @CodeFlexx
       </div>
     </div>
   );
