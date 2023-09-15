@@ -5,8 +5,15 @@ import Model from "@/app/components/dashboard/Module";
 
 const Server = () => {
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+
   const handleOpen = () => {
     setOpen(true);
+  };
+
+  const handleCreate = () => {
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -30,12 +37,25 @@ const Server = () => {
         <div className="text-4xl font-semibold">
           <h1 className="text-gray-800">Server</h1>
         </div>
+        {Boolean(name) && (
+          <div>
+            <h1>Name: {name}</h1>
+          </div>
+        )}
+        {Boolean(description) && (
+          <div>
+            <h1>Description: {description}</h1>
+          </div>
+        )}
       </div>
       <Model
         open={open}
         setOpen={setOpen}
         title="Enter Sever Details"
         description="Fill out the formula"
+        updateName={setName}
+        updateDescription={setDescription}
+        handleCreate={handleCreate}
       />
     </div>
   );

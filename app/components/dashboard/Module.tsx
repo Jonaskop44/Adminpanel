@@ -9,9 +9,20 @@ interface ModalProps {
   setOpen: (open: boolean) => void;
   title: string;
   description: string;
+  updateName: (name: string) => void;
+  updateDescription: (description: string) => void;
+  handleCreate: () => void;
 }
 
-const Model: React.FC<ModalProps> = ({ open, setOpen, title, description }) => {
+const Model: React.FC<ModalProps> = ({
+  open,
+  setOpen,
+  title,
+  description,
+  updateName,
+  updateDescription,
+  handleCreate,
+}) => {
   const cancelButtonRef = useRef(null);
 
   return (
@@ -71,17 +82,34 @@ const Model: React.FC<ModalProps> = ({ open, setOpen, title, description }) => {
                   </div>
                 </div>
                 <div className="justify-center mt-10">
-                  <LicenseInput id="name" label="Name" required={true} />
+                  <LicenseInput
+                    id="name"
+                    label="Name"
+                    required={true}
+                    onChange={(e) => {
+                      const newName = e.target.value;
+                      console.log("New Name:", newName); // Add this line for debugging
+                      updateName(newName);
+                    }}
+                  />
                   <LicenseInput
                     id="description"
                     label="Description"
                     required={true}
+                    onChange={(e) => {
+                      const newDescription = e.target.value;
+                      console.log("New Description:", newDescription); // Add this line for debugging
+                      updateDescription(newDescription);
+                    }}
                   />
                 </div>
               </div>
               <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
                 <LicenseButton
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    handleCreate();
+                    setOpen(false);
+                  }}
                   fullWidth
                   secondary
                   style="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
