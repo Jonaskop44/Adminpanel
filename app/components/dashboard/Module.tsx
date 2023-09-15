@@ -1,10 +1,8 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
 import * as IconFa from "react-icons/fa";
-import LicenseInput from "./inputs/LicenseInput";
-import LicenseButton from "./buttons/LicenseButton";
+import LicenseInput from "./Input";
+import LicenseButton from "./Button";
 
 interface ModalProps {
   open: boolean;
@@ -15,22 +13,6 @@ interface ModalProps {
 
 const Model: React.FC<ModalProps> = ({ open, setOpen, title, description }) => {
   const cancelButtonRef = useRef(null);
-  const [isLoading, setLoading] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FieldValues>({
-    defaultValues: {
-      name: "",
-      description: "",
-    },
-  });
-
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    setLoading(true);
-  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -89,14 +71,8 @@ const Model: React.FC<ModalProps> = ({ open, setOpen, title, description }) => {
                   </div>
                 </div>
                 <div className="justify-center mt-10">
+                  <LicenseInput id="name" label="Name" required={true} />
                   <LicenseInput
-                    disabled={isLoading}
-                    id="name"
-                    label="Name"
-                    required={true}
-                  />
-                  <LicenseInput
-                    disabled={isLoading}
                     id="description"
                     label="Description"
                     required={true}
@@ -105,7 +81,6 @@ const Model: React.FC<ModalProps> = ({ open, setOpen, title, description }) => {
               </div>
               <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
                 <LicenseButton
-                  disabled={isLoading}
                   onClick={() => setOpen(false)}
                   fullWidth
                   secondary
@@ -114,7 +89,6 @@ const Model: React.FC<ModalProps> = ({ open, setOpen, title, description }) => {
                   Create
                 </LicenseButton>
                 <LicenseButton
-                  disabled={isLoading}
                   onClick={() => setOpen(false)}
                   fullWidth
                   danger

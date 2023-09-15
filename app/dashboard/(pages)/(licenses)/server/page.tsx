@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Model from "@/app/components/LicenseModule";
+import Model from "@/app/components/dashboard/Module";
 
 const Server = () => {
   const [open, setOpen] = useState(false);
