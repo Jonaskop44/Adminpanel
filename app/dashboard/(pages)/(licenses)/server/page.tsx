@@ -2,18 +2,49 @@
 
 import { useEffect, useState } from "react";
 import Model from "@/app/components/dashboard/Module";
+import Box from "@/app/components/dashboard/license/Box";
+import axios from "axios";
 
 const Server = () => {
   const [open, setOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [servers, setServers] = useState<Box[]>([]);
+  const [moduleForm, setModuleForm] = useState<Box>({
+    name: "",
+    description: "",
+    license: true,
+  });
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const getServers = async () => {
+      const servers = await axios.get("/api/server");
+      setServers(servers.data);
+      setIsLoading(false);
+    };
+    getServers();
+  }, []);
 
   const handleOpen = () => {
     setOpen(true);
   };
+
   const handleCreate = () => {
+    axios.post("/api/server", {
+      name: moduleForm.name,
+      description: moduleForm.description,
+      license: moduleForm.license,
+    });
+    setServers((prev) => [
+      ...prev,
+      {
+        name: moduleForm.name,
+        description: moduleForm.description,
+        license: moduleForm.license,
+      },
+    ]);
     setOpen(false);
   };
+
   useEffect(() => {
     document.documentElement.style.overflow = "hidden";
     return () => {
@@ -32,27 +63,14 @@ const Server = () => {
         </button>
       </div>
       <div className="flex items-center justify-center h-screen">
-        <div className="text-4xl font-semibold">
-          <h1 className="text-gray-800">Server</h1>
-        </div>
-        {Boolean(name) && (
-          <div>
-            <h1>Name: {name}</h1>
-          </div>
-        )}
-        {Boolean(description) && (
-          <div>
-            <h1>Description: {description}</h1>
-          </div>
-        )}
+        <Box servers={servers} isLoading={isLoading} />
       </div>
       <Model
         open={open}
         setOpen={setOpen}
         title="Enter Sever Details"
         description="Fill out the formula"
-        updateName={setName}
-        updateDescription={setDescription}
+        updateModuleForm={setModuleForm}
         handleCreate={handleCreate}
       />
     </div>

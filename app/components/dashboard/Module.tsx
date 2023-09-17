@@ -3,14 +3,15 @@ import { Dialog, Transition } from "@headlessui/react";
 import * as IconFa from "react-icons/fa";
 import LicenseInput from "./Input";
 import LicenseButton from "./Button";
+import LicenseSelect from "./SelectMenu";
+import Box from "@/app/components/dashboard/license/Box";
 
 interface ModalProps {
   open: boolean;
   setOpen: (open: boolean) => void;
   title: string;
   description: string;
-  updateName: (name: string) => void;
-  updateDescription: (description: string) => void;
+  updateModuleForm: React.Dispatch<React.SetStateAction<Box>>;
   handleCreate: () => void;
 }
 
@@ -19,8 +20,7 @@ const Model: React.FC<ModalProps> = ({
   setOpen,
   title,
   description,
-  updateName,
-  updateDescription,
+  updateModuleForm,
   handleCreate,
 }) => {
   const cancelButtonRef = useRef(null);
@@ -87,21 +87,20 @@ const Model: React.FC<ModalProps> = ({
                     label="Name"
                     required={true}
                     onChange={(e) => {
-                      const newName = e.target.value;
-                      console.log("New Name:", newName); // Add this line for debugging
-                      updateName(newName);
+                      const { value, id } = e.target;
+                      updateModuleForm((prev) => ({ ...prev, [id]: value }));
                     }}
                   />
                   <LicenseInput
                     id="description"
                     label="Description"
-                    required={true}
+                    required
                     onChange={(e) => {
-                      const newDescription = e.target.value;
-                      console.log("New Description:", newDescription); // Add this line for debugging
-                      updateDescription(newDescription);
+                      const { value, id } = e.target;
+                      updateModuleForm((prev) => ({ ...prev, [id]: value }));
                     }}
                   />
+                  <LicenseSelect />
                 </div>
               </div>
               <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
