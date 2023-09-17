@@ -11,11 +11,9 @@ const Server = () => {
   const handleOpen = () => {
     setOpen(true);
   };
-
   const handleCreate = () => {
     setOpen(false);
   };
-
   useEffect(() => {
     document.documentElement.style.overflow = "hidden";
     return () => {
@@ -27,7 +25,7 @@ const Server = () => {
     <div className="m-0 h-full">
       <div className="flex justify-end items-start">
         <button
-          className="mt-4 mr-64 bg-blue-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-xl"
+          className="bg-blue-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-xl"
           onClick={handleOpen}
         >
           Add Server

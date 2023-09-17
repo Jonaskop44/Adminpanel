@@ -18,14 +18,14 @@ model User {
 }
 
 model Plugins {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
   name String
   description String
   license String
 }
 
 model Server {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
   name String
   description String
   license String
