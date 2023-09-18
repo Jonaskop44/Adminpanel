@@ -4,12 +4,13 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, description } = body;
+    const { name, description, license } = body;
+    console.log(body);
     const server = await prisma.server.create({
       data: {
         name: name,
         description: description,
-        license: "",
+        license: license,
       },
     });
     return NextResponse.json(server);

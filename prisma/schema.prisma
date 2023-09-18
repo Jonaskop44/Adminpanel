@@ -21,12 +21,12 @@ model Plugins {
   id Int @id @default(autoincrement())
   name String
   description String
-  license String
+  license Boolean
 }
 
 model Server {
   id Int @id @default(autoincrement())
   name String
   description String
-  license String
+  license Boolean
 }
