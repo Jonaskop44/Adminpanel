@@ -1,4 +1,8 @@
 import * as IconFa from "react-icons/fa";
+import { HiOutlinePencil } from "react-icons/hi";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { AiOutlineCheckCircle } from "react-icons/ai";
+import { HiOutlineXCircle } from "react-icons/hi";
 
 type Box = {
   name: string;
@@ -43,40 +47,31 @@ const Box: React.FC<BoxProps> = ({ servers, isLoading }) => {
             <div>
               <div className="-mt-px flex divide-x divide-gray-200">
                 <div className="w-0 flex-1 flex">
-                  <a
-                    href={`mailto:${list.name}`}
-                    className="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500"
-                  >
-                    <IconFa.FaAdversal
+                  <button className="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                    <HiOutlinePencil
                       className="w-5 h-5 text-gray-400"
                       aria-hidden="true"
                     />
-                    <span className="ml-3">Edit</span>
-                  </a>
+                    Edit
+                  </button>
                 </div>
                 <div className="-ml-px w-0 flex-1 flex">
-                  <a
-                    href={`tel:${list.name}`}
-                    className="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
-                  >
-                    <IconFa.Fa500Px
+                  <button className="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
+                    <AiOutlineCheckCircle
                       className="w-5 h-5 text-gray-400"
                       aria-hidden="true"
                     />
-                    <span className="ml-3">License</span>
-                  </a>
+                    Status
+                  </button>
                 </div>
                 <div className="-ml-px w-0 flex-1 flex">
-                  <a
-                    href={`tel:${list.name}`}
-                    className="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
-                  >
-                    <IconFa.Fa500Px
+                  <button className="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
+                    <RiDeleteBin6Line
                       className="w-5 h-5 text-gray-400"
                       aria-hidden="true"
                     />
-                    <span className="ml-3">Remove</span>
-                  </a>
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
