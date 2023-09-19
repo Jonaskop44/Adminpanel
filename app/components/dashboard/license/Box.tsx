@@ -35,9 +35,15 @@ const Box: React.FC<BoxProps> = ({ servers, isLoading }) => {
                   <h3 className="text-gray-900 text-sm font-medium truncate">
                     {list.name}
                   </h3>
-                  <span className="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full">
-                    {list.license ? "Licensed" : "Unlicensed"}
-                  </span>
+                  {list.license ? (
+                    <span className="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full">
+                      Licensed
+                    </span>
+                  ) : (
+                    <span className="flex-shrink-0 inline-block px-2 py-0.5 text-red-800 text-xs font-medium bg-red-100 rounded-full">
+                      Unlicensed
+                    </span>
+                  )}
                 </div>
                 <p className="mt-1 text-gray-500 text-sm truncate">
                   {list.description}
