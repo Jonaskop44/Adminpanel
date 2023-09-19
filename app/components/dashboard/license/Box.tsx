@@ -1,13 +1,14 @@
-import * as IconFa from "react-icons/fa";
 import { HiOutlinePencil } from "react-icons/hi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { HiOutlineXCircle } from "react-icons/hi";
+import axios from "axios";
 
 type Box = {
   name: string;
   description: string;
   license: boolean;
+  id: number;
 };
 
 interface BoxProps {
@@ -16,6 +17,17 @@ interface BoxProps {
 }
 
 const Box: React.FC<BoxProps> = ({ servers, isLoading }) => {
+  const handleDelete = (id: number) => {
+    axios
+      .delete("/api/server/" + id)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <ul
       role="list"
@@ -71,7 +83,10 @@ const Box: React.FC<BoxProps> = ({ servers, isLoading }) => {
                   </button>
                 </div>
                 <div className="-ml-px w-0 flex-1 flex">
-                  <button className="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
+                  <button
+                    onClick={() => handleDelete(list.id)}
+                    className="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
+                  >
                     <RiDeleteBin6Line
                       className="w-5 h-5 text-gray-400"
                       aria-hidden="true"

@@ -28,19 +28,3 @@ export async function GET(request: Request) {
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
-
-export async function DELETE(request: Request) {
-  try {
-    const body = await request.json();
-    const { id } = body;
-    const server = await prisma.server.delete({
-      where: {
-        id: id,
-      },
-    });
-    return NextResponse.json(server);
-  } catch (error) {
-    console.log(error, "SERVER LICENSE ERROR-DELETE");
-    return new NextResponse("Internal Error", { status: 500 });
-  }
-}
