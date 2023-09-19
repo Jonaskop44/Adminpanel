@@ -11,7 +11,7 @@ const Server = () => {
   const [moduleForm, setModuleForm] = useState<Box>({
     name: "",
     description: "",
-    license: false,
+    license: true,
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
 

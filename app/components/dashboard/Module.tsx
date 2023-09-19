@@ -100,7 +100,7 @@ const Model: React.FC<ModalProps> = ({
                       updateModuleForm((prev) => ({ ...prev, [id]: value }));
                     }}
                   />
-                  <LicenseSelect />
+                  <LicenseSelect updateModuleForm={updateModuleForm} />
                 </div>
               </div>
               <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
