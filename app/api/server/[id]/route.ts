@@ -54,10 +54,13 @@ export async function PATCH(request: Request, params: { id: number }) {
   }
 }
 
-export async function DELETE(request: Request, params: { id: number }) {
+export async function DELETE(
+  request: Request,
+  params: { params: { id: number } }
+) {
   try {
-    const { id } = params;
-    console.log(id);
+    const _id = params.params.id;
+    const id = Number(_id);
     await prisma.server.delete({
       where: {
         id: id,

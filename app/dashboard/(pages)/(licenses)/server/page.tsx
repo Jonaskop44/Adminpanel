@@ -12,6 +12,7 @@ const Server = () => {
     name: "",
     description: "",
     license: true,
+    id: 0,
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -28,8 +29,8 @@ const Server = () => {
     setOpen(true);
   };
 
-  const handleCreate = () => {
-    axios.post("/api/server", {
+  const handleCreate = async () => {
+    const response = await axios.post("/api/server", {
       name: moduleForm.name,
       description: moduleForm.description,
       license: moduleForm.license,
@@ -40,6 +41,7 @@ const Server = () => {
         name: moduleForm.name,
         description: moduleForm.description,
         license: moduleForm.license,
+        id: response.data.id,
       },
     ]);
     setOpen(false);
@@ -63,7 +65,7 @@ const Server = () => {
         </button>
       </div>
       <div className="flex items-center justify-center h-screen">
-        <Box servers={servers} isLoading={isLoading} />
+        <Box servers={servers} isLoading={isLoading} setServers={setServers} />
       </div>
       <Model
         open={open}

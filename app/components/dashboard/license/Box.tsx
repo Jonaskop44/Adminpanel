@@ -14,9 +14,10 @@ type Box = {
 interface BoxProps {
   servers: Box[];
   isLoading: boolean;
+  setServers: React.Dispatch<React.SetStateAction<Box[]>>;
 }
 
-const Box: React.FC<BoxProps> = ({ servers, isLoading }) => {
+const Box: React.FC<BoxProps> = ({ servers, isLoading, setServers }) => {
   const handleDelete = (id: number) => {
     axios
       .delete("/api/server/" + id)
@@ -84,7 +85,13 @@ const Box: React.FC<BoxProps> = ({ servers, isLoading }) => {
                 </div>
                 <div className="-ml-px w-0 flex-1 flex">
                   <button
-                    onClick={() => handleDelete(list.id)}
+                    onClick={() => {
+                      handleDelete(list.id);
+                      const updateServers = servers.filter(
+                        (item) => item.id !== list.id
+                      );
+                      setServers(updateServers);
+                    }}
                     className="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
                   >
                     <RiDeleteBin6Line
