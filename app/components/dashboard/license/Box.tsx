@@ -1,8 +1,8 @@
 import { HiOutlinePencil } from "react-icons/hi";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { AiOutlineCheckCircle } from "react-icons/ai";
-import { HiOutlineXCircle } from "react-icons/hi";
 import axios from "axios";
+import EmptyStates from "./EmptyStates";
+import { useState } from "react";
 
 type Box = {
   name: string;
@@ -15,9 +15,24 @@ interface BoxProps {
   servers: Box[];
   isLoading: boolean;
   setServers: React.Dispatch<React.SetStateAction<Box[]>>;
+  setCurrentServer: React.Dispatch<React.SetStateAction<Box>>;
+  setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Box: React.FC<BoxProps> = ({ servers, isLoading, setServers }) => {
+const Box: React.FC<BoxProps> = ({
+  servers,
+  isLoading,
+  setServers,
+  setCurrentServer,
+  setEditOpen,
+}) => {
+  const [moduleForm, setModuleForm] = useState<Box>({
+    name: "",
+    description: "",
+    license: true,
+    id: 0,
+  });
+
   const handleDelete = (id: number) => {
     axios
       .delete("/api/server/" + id)
@@ -66,21 +81,18 @@ const Box: React.FC<BoxProps> = ({ servers, isLoading, setServers }) => {
             <div>
               <div className="-mt-px flex divide-x divide-gray-200">
                 <div className="w-0 flex-1 flex">
-                  <button className="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                  <button
+                    onClick={() => {
+                      setCurrentServer(list);
+                      setEditOpen(true);
+                    }}
+                    className="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500"
+                  >
                     <HiOutlinePencil
                       className="w-5 h-5 text-gray-400"
                       aria-hidden="true"
                     />
                     Edit
-                  </button>
-                </div>
-                <div className="-ml-px w-0 flex-1 flex">
-                  <button className="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
-                    <AiOutlineCheckCircle
-                      className="w-5 h-5 text-gray-400"
-                      aria-hidden="true"
-                    />
-                    Status
                   </button>
                 </div>
                 <div className="-ml-px w-0 flex-1 flex">
@@ -106,9 +118,7 @@ const Box: React.FC<BoxProps> = ({ servers, isLoading, setServers }) => {
           </li>
         ))
       ) : (
-        <div className="text-4xl font-semibold">
-          <h1 className="text-gray-800">Create Server</h1>
-        </div>
+        <EmptyStates name="Create a new Server" />
       )}
     </ul>
   );

@@ -13,6 +13,8 @@ interface ModalProps {
   description: string;
   updateModuleForm: React.Dispatch<React.SetStateAction<Box>>;
   handleCreate: () => void;
+  currentData: Box;
+  button: string;
 }
 
 const Model: React.FC<ModalProps> = ({
@@ -22,6 +24,8 @@ const Model: React.FC<ModalProps> = ({
   description,
   updateModuleForm,
   handleCreate,
+  currentData,
+  button,
 }) => {
   const cancelButtonRef = useRef(null);
 
@@ -85,6 +89,7 @@ const Model: React.FC<ModalProps> = ({
                   <LicenseInput
                     id="name"
                     label="Name"
+                    value={currentData.name}
                     required={true}
                     onChange={(e) => {
                       const { value, id } = e.target;
@@ -95,6 +100,7 @@ const Model: React.FC<ModalProps> = ({
                     id="description"
                     label="Description"
                     required
+                    value={currentData.description}
                     onChange={(e) => {
                       const { value, id } = e.target;
                       updateModuleForm((prev) => ({ ...prev, [id]: value }));
@@ -113,7 +119,7 @@ const Model: React.FC<ModalProps> = ({
                   secondary
                   style="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
                 >
-                  Create
+                  {button}
                 </LicenseButton>
                 <LicenseButton
                   onClick={() => setOpen(false)}

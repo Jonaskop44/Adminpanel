@@ -7,6 +7,7 @@ interface LicenseInputProps {
   type?: string;
   required?: boolean;
   disabled?: boolean;
+  value?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -17,6 +18,7 @@ const LicenseInput: React.FC<LicenseInputProps> = ({
   required,
   disabled,
   onChange,
+  value,
 }) => {
   return (
     <div>
@@ -34,6 +36,7 @@ const LicenseInput: React.FC<LicenseInputProps> = ({
           disabled={disabled}
           required={required}
           onChange={onChange}
+          value={value}
           className={clsx(
             `form-input 
                 block 
