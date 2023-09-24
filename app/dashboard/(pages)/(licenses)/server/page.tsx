@@ -6,7 +6,7 @@ import Box from "@/app/components/dashboard/license/Box";
 import axios from "axios";
 import Notifications from "@/app/components/dashboard/license/Notifications";
 import { GoAlert, GoCheck } from "react-icons/go";
-const initBox: Box = { name: "", description: "", license: true, id: 0 };
+
 const Server = () => {
   const [open, setOpen] = useState(false);
   const [servers, setServers] = useState<Box[]>([]);
@@ -17,9 +17,11 @@ const Server = () => {
     license: true,
     id: 0,
   });
+  const initBox: Box = { name: "", description: "", license: true, id: 0 };
   const [currentNotification, setCurrentNotification] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentServer, setCurrentServer] = useState<Box>(initBox);
+
   useEffect(() => {
     const getServers = async () => {
       const servers = await axios.get("/api/server");

@@ -26,13 +26,6 @@ const Box: React.FC<BoxProps> = ({
   setCurrentServer,
   setEditOpen,
 }) => {
-  const [moduleForm, setModuleForm] = useState<Box>({
-    name: "",
-    description: "",
-    license: true,
-    id: 0,
-  });
-
   const handleDelete = (id: number) => {
     axios
       .delete("/api/server/" + id)
