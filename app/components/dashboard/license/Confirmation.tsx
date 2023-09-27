@@ -9,6 +9,7 @@ interface ConfirmationProps {
   setOpen: (open: boolean) => void;
   servers: Box[];
   setServers: React.Dispatch<React.SetStateAction<Box[]>>;
+  handleDelete: (id: number) => void;
 }
 
 const Confirmation: React.FC<ConfirmationProps> = ({
@@ -16,19 +17,9 @@ const Confirmation: React.FC<ConfirmationProps> = ({
   setOpen,
   servers,
   setServers,
+  handleDelete,
 }) => {
   const cancelButtonRef = useRef(null);
-
-  const handleDelete = (id: number) => {
-    axios
-      .delete("/api/server/" + id)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   return (
     <div>

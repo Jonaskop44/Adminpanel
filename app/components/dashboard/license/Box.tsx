@@ -17,6 +17,7 @@ interface BoxProps {
   setServers: React.Dispatch<React.SetStateAction<Box[]>>;
   setCurrentServer: React.Dispatch<React.SetStateAction<Box>>;
   setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleDelete: (id: number) => void;
 }
 
 const Box: React.FC<BoxProps> = ({
@@ -25,6 +26,7 @@ const Box: React.FC<BoxProps> = ({
   setServers,
   setCurrentServer,
   setEditOpen,
+  handleDelete,
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -39,6 +41,7 @@ const Box: React.FC<BoxProps> = ({
         setOpen={setOpen}
         servers={servers}
         setServers={setServers}
+        handleDelete={handleDelete}
       />
       <ul
         role="list"

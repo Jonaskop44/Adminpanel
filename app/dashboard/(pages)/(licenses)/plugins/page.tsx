@@ -59,6 +59,17 @@ const Plugins = () => {
     setOpen(false);
   };
 
+  const handleDelete = (id: number) => {
+    axios
+      .delete("/api/plugin/" + id)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handleEdit = async () => {
     await axios.patch(`/api/plugin/${currentPlugin.id}`, currentPlugin);
     setPlugins((prev) => {
@@ -127,6 +138,7 @@ const Plugins = () => {
           setServers={setPlugins}
           setCurrentServer={setCurrentPlugin}
           setEditOpen={setEditOpen}
+          handleDelete={handleDelete}
         />
       </div>
       <Model

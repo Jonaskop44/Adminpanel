@@ -59,6 +59,17 @@ const Server = () => {
     setOpen(false);
   };
 
+  const handleDelete = (id: number) => {
+    axios
+      .delete("/api/server/" + id)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handleEdit = async () => {
     await axios.patch(`/api/server/${currentServer.id}`, currentServer);
     setServers((prev) => {
@@ -125,6 +136,7 @@ const Server = () => {
           setServers={setServers}
           setCurrentServer={setCurrentServer}
           setEditOpen={setEditOpen}
+          handleDelete={handleDelete}
         />
       </div>
       <Model
