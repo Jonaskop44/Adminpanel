@@ -115,16 +115,12 @@ const Model: React.FC<ModalProps> = ({
                     handleCreate();
                     setOpen(false);
                   }}
-                  fullWidth
-                  secondary
                   style="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-sky-500 text-base font-medium text-white hover:bg-sky-600 focus:outline-none sm:col-start-2 sm:text-sm"
                 >
                   {button}
                 </LicenseButton>
                 <LicenseButton
                   onClick={() => setOpen(false)}
-                  fullWidth
-                  danger
                   style="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:col-start-1 sm:text-sm"
                 >
                   Cancel

@@ -1,6 +1,5 @@
 import { HiOutlinePencil } from "react-icons/hi";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import axios from "axios";
 import EmptyStates from "./EmptyStates";
 import { useState } from "react";
 import Confirmation from "./Confirmation";

@@ -65,13 +65,13 @@ export async function DELETE(
 ) {
   try {
     const id = Number(params.params.id);
-    const deletedPlugins = await prisma.plugins.delete({
+    await prisma.plugins.delete({
       where: {
         id: id,
       },
     });
 
-    return NextResponse.json(deletedPlugins);
+    return NextResponse.json("Plugin deleted");
   } catch (error) {
     console.log(error, "PLUGIN LICENSE ERROR-DELETE");
     return new NextResponse("Internal Error", { status: 500 });
