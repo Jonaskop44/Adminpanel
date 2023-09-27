@@ -7,21 +7,21 @@ export async function GET(
 ) {
   try {
     const id = Number(params.params.id);
-    const server = await prisma.server.findUnique({
+    const plugins = await prisma.plugins.findUnique({
       where: {
         id: id,
       },
     });
-    if (!server) {
+    if (!plugins) {
       return NextResponse.json(
-        { message: "Server not found" },
+        { message: "Plugin not found" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(server);
+    return NextResponse.json(plugins);
   } catch (error) {
-    console.log(error, "SERVER LICENSE ERROR-GET");
+    console.log(error, "PLUGIN LICENSE ERROR-GET");
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
@@ -35,7 +35,7 @@ export async function PATCH(
     const { name, description, license } = body;
     const id = Number(params.params.id);
 
-    const updatedServer = await prisma.server.update({
+    const updatedPlugins = await prisma.plugins.update({
       where: {
         id: id,
       },
@@ -45,17 +45,16 @@ export async function PATCH(
         license: license as boolean,
       },
     });
-
-    if (!updatedServer) {
+    if (!updatedPlugins) {
       return NextResponse.json(
-        { message: "Server not found" },
+        { message: "Plugin not found" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(updatedServer);
+    return NextResponse.json(updatedPlugins);
   } catch (error) {
-    console.log(error, "SERVER LICENSE ERROR-PATCH");
+    console.log(error, "PLUGIN LICENSE ERROR-PATCH");
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
@@ -66,15 +65,15 @@ export async function DELETE(
 ) {
   try {
     const id = Number(params.params.id);
-    await prisma.server.delete({
+    const deletedPlugins = await prisma.plugins.delete({
       where: {
         id: id,
       },
     });
 
-    return NextResponse.json("Server deleted");
+    return NextResponse.json(deletedPlugins);
   } catch (error) {
-    console.log(error, "SERVER LICENSE ERROR-DELETE");
+    console.log(error, "PLUGIN LICENSE ERROR-DELETE");
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

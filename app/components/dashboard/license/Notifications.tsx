@@ -1,6 +1,7 @@
 import { Fragment, useState, useEffect } from "react";
 import { Transition } from "@headlessui/react";
 import { HiOutlineX } from "react-icons/hi";
+import { set } from "react-hook-form";
 
 interface NotificationsProps {
   setCurrentNotification: React.Dispatch<React.SetStateAction<string>>;
@@ -18,6 +19,15 @@ const Notifications: React.FC<NotificationsProps> = ({
   icon,
 }) => {
   const [show, setShow] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShow(false);
+      setCurrentNotification("");
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [setCurrentNotification]);
 
   return (
     <>
@@ -48,7 +58,7 @@ const Notifications: React.FC<NotificationsProps> = ({
                   </div>
                   <div className="ml-4 flex-shrink-0 flex">
                     <button
-                      className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500"
                       onClick={() => {
                         setCurrentNotification("");
                       }}

@@ -71,6 +71,7 @@ const Server = () => {
       return updatedServers;
     });
     setCurrentServer(initBox);
+    setCurrentNotification("saved-success");
   };
 
   useEffect(() => {
@@ -96,6 +97,15 @@ const Server = () => {
           currentNotification={currentNotification}
           setCurrentNotification={setCurrentNotification}
           title="Created Successfully"
+          description=""
+          icon={<GoCheck className="h-6 w-6 text-green-400" />}
+        />
+      )}
+      {currentNotification == "saved-success" && (
+        <Notifications
+          currentNotification={currentNotification}
+          setCurrentNotification={setCurrentNotification}
+          title="Saved Successfully"
           description=""
           icon={<GoCheck className="h-6 w-6 text-green-400" />}
         />
