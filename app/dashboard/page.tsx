@@ -2,6 +2,7 @@
 
 import { signOut, useSession } from "next-auth/react";
 import { useEffect } from "react";
+import ThemeSwitcher from "../components/ThemeSwitcher";
 
 const App = () => {
   const session = useSession();
@@ -15,11 +16,14 @@ const App = () => {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <h1 className="text-4xl font-semibold text-gray-800">
+      <div className="absolute top-12 right-[250px]">
+        <ThemeSwitcher />
+      </div>
+      <h1 className="text-4xl font-semibold text-gray-800 dark:text-darkText">
         Login as {session.data?.user?.name}
       </h1>
       <button onClick={() => signOut()}>Sign</button>
-      <div className="absolute bottom-2 right-2 text-gray-500 text-sm">
+      <div className="absolute bottom-2 right-2 text-gray-500 text-sm dark:text-gray-400">
         @CodeFlexx
       </div>
     </div>

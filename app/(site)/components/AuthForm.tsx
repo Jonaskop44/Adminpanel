@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import Input from "@/app/components/inputs/Input";
 import Button from "@/app/components/Button";
 import { toast } from "react-hot-toast";
+import { useTheme } from "next-themes";
 
 type Variant = "LOGIN" | "REGISTER";
 
@@ -16,6 +17,7 @@ const AuthForm = () => {
   const [isLoading, setLoading] = useState(false);
   const router = useRouter();
   const session = useSession();
+  const { theme } = useTheme();
 
   const toggleVariant = useCallback(() => {
     if (variant == "LOGIN") {
@@ -77,11 +79,33 @@ const AuthForm = () => {
         .then((callback) => {
           console.log(callback);
           if (callback?.error) {
-            toast.error("Invalid credentials!");
+            if (theme === "dark") {
+              toast("Invalid credentials!", {
+                icon: "❌",
+                style: {
+                  borderRadius: "10px",
+                  background: "#333",
+                  color: "#fff",
+                },
+              });
+            } else {
+              toast.error("Invalid credentials!");
+            }
           }
 
           if (callback?.ok && !callback?.error) {
-            toast.success("Logged In!");
+            if (theme === "dark") {
+              toast("Logged In!", {
+                icon: "✅",
+                style: {
+                  borderRadius: "10px",
+                  background: "#333",
+                  color: "#fff",
+                },
+              });
+            } else {
+              toast.success("Logged In!");
+            }
             router.push("/dashboard");
           }
         })
@@ -91,10 +115,10 @@ const AuthForm = () => {
 
   return (
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-      <h2 className="mb-8 text-center text-3xl font-bold tracking-tighter text-gray-900">
+      <h2 className="mb-8 text-center text-3xl font-bold tracking-tighter text-gray-900 dark:text-darkText">
         {variant == "LOGIN" ? "Sign in to your account" : "Create an account"}
       </h2>
-      <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
+      <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10 dark:bg-secondaryDark">
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           {variant == "REGISTER" && (
             <Input
@@ -134,10 +158,10 @@ const AuthForm = () => {
         <div className="mt-6">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300" />
+              <div className="w-full border-t border-gray-300 " />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="bg-white px-2 text-gray-500">
+              <span className="bg-white px-2 text-gray-500 dark:bg-secondaryDark dark:text-darkText">
                 {variant === "LOGIN"
                   ? "New to AdminPanel"
                   : "Already have an account?"}
@@ -146,7 +170,7 @@ const AuthForm = () => {
           </div>
         </div>
 
-        <div className="flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500">
+        <div className="flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500 dark:text-darkText">
           <div onClick={toggleVariant} className="underline cursor-pointer">
             {variant === "LOGIN" ? "Create an account" : "Login"}
           </div>

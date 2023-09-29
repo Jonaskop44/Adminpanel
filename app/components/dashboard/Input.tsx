@@ -24,7 +24,7 @@ const LicenseInput: React.FC<LicenseInputProps> = ({
     <div>
       <label
         htmlFor={id}
-        className="block text-sm font-medium leading-6 text-gray-900"
+        className="block text-sm font-medium leading-6 text-gray-900 dark:text-darkText"
       >
         {label}
       </label>
@@ -45,7 +45,7 @@ const LicenseInput: React.FC<LicenseInputProps> = ({
                 border-0
                 outline-none
                 py-1.5 
-                text-gray-900 
+                text-gray-900
                 shadow-sm
                 ring-1 
                 ring-inset 
@@ -55,7 +55,7 @@ const LicenseInput: React.FC<LicenseInputProps> = ({
                 focus:ring-inset 
                 focus:ring-sky-600 
                 sm:text-sm 
-                sm:leading-6`,
+                sm:leading-6 dark:text-darkText dark:bg-dark`,
             disabled && "opacity-50 cursor-default"
           )}
         />
