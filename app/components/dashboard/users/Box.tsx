@@ -6,25 +6,25 @@ import Confirmation from "./Confirmation";
 
 type Box = {
   name: string;
-  description: string;
-  license: boolean;
-  id: number;
+  email: string;
+  password: string;
+  id: string;
 };
 
 interface BoxProps {
-  servers: Box[];
+  users: Box[];
   isLoading: boolean;
-  setServers: React.Dispatch<React.SetStateAction<Box[]>>;
-  setCurrentServer: React.Dispatch<React.SetStateAction<Box>>;
+  setUsers: React.Dispatch<React.SetStateAction<Box[]>>;
+  setCurrentUser: React.Dispatch<React.SetStateAction<Box>>;
   setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  handleDelete: (id: number) => void;
+  handleDelete: (id: string) => void;
 }
 
 const Box: React.FC<BoxProps> = ({
-  servers,
+  users,
   isLoading,
-  setServers,
-  setCurrentServer,
+  setUsers,
+  setCurrentUser,
   setEditOpen,
   handleDelete,
 }) => {
@@ -39,8 +39,8 @@ const Box: React.FC<BoxProps> = ({
       <Confirmation
         open={open}
         setOpen={setOpen}
-        servers={servers}
-        setServers={setServers}
+        users={users}
+        setUsers={setUsers}
         handleDelete={handleDelete}
       />
       <ul
@@ -49,8 +49,8 @@ const Box: React.FC<BoxProps> = ({
       >
         {isLoading ? (
           <div>Loading...</div>
-        ) : servers[0] ? (
-          servers.map((list, index) => (
+        ) : users[0] ? (
+          users.map((list, index) => (
             <li
               key={index}
               className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200 dark:bg-secondaryDark"
@@ -61,18 +61,9 @@ const Box: React.FC<BoxProps> = ({
                     <h3 className="text-gray-900 text-sm font-medium truncate dark:text-darkText">
                       {list.name}
                     </h3>
-                    {list.license ? (
-                      <span className="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-200 rounded-full">
-                        Licensed
-                      </span>
-                    ) : (
-                      <span className="flex-shrink-0 inline-block px-2 py-0.5 text-red-800 text-xs font-medium bg-red-100 rounded-full">
-                        Unlicensed
-                      </span>
-                    )}
                   </div>
                   <p className="mt-1 text-gray-500 text-sm truncate dark:text-darkText">
-                    {list.description}
+                    {list.email}
                   </p>
                 </div>
               </div>
@@ -81,7 +72,7 @@ const Box: React.FC<BoxProps> = ({
                   <div className="w-0 flex-1 flex">
                     <button
                       onClick={() => {
-                        setCurrentServer(list);
+                        setCurrentUser(list);
                         setEditOpen(true);
                       }}
                       className="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500 dark:text-darkText"
@@ -110,7 +101,7 @@ const Box: React.FC<BoxProps> = ({
             </li>
           ))
         ) : (
-          <EmptyStates name="Create a new Server" />
+          <EmptyStates name="Create a new User" />
         )}
       </ul>
     </div>

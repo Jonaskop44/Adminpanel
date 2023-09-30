@@ -15,7 +15,7 @@ const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Invalid credentials 1");
+          throw new Error("Invalid credentials");
         }
 
         const user = await prisma.user.findUnique({
@@ -32,7 +32,7 @@ const authOptions: AuthOptions = {
           : false;
 
         if (!isCorrectPassword) {
-          throw new Error("Invalid credentials 2");
+          throw new Error("Invalid credentials");
         }
 
         return user;

@@ -10,11 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserPermission {
+  ADMIN
+  USER
+  MODERATOR
+}
+
 model User {
   id String @id @default(uuid())
   email String @unique
   hashedPassword String?
   name String?
+  role UserPermission @default(USER)
 }
 
 model Plugins {

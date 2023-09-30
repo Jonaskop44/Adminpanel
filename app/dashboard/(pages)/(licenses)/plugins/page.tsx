@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Model from "@/app/components/dashboard/Module";
+import Model from "@/app/components/dashboard/license/Module";
 import Box from "@/app/components/dashboard/license/Box";
 import axios from "axios";
-import Notifications from "@/app/components/dashboard/license/Notifications";
+import Notifications from "@/app/components/dashboard/Notifications";
 import { GoAlert, GoCheck } from "react-icons/go";
 
 const Plugins = () => {

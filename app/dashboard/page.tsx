@@ -1,14 +1,14 @@
 "use client";
 
 import { signOut, useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ThemeSwitcher from "../components/ThemeSwitcher";
 
 const App = () => {
   const session = useSession();
-
   useEffect(() => {
     document.documentElement.style.overflow = "hidden";
+    console.log(session.data?.user);
     return () => {
       document.documentElement.style.overflow = "visible";
     };
@@ -23,9 +23,7 @@ const App = () => {
         Login as {session.data?.user?.name}
       </h1>
       <button onClick={() => signOut()}>Sign</button>
-      <div className="absolute bottom-2 right-2 text-gray-500 text-sm dark:text-gray-400">
-        @CodeFlexx
-      </div>
+      <div className="absolute bottom-2 right-2 text-gray-500 text-sm dark:text-gray-400"></div>
     </div>
   );
 };

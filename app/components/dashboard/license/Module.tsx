@@ -1,9 +1,9 @@
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import * as IconFa from "react-icons/fa";
-import LicenseInput from "./Input";
-import LicenseButton from "./Button";
-import LicenseSelect from "./SelectMenu";
+import LicenseInput from "../Input";
+import LicenseButton from "../Button";
+import LicenseSelect from "../SelectMenu";
 import Box from "@/app/components/dashboard/license/Box";
 
 interface ModalProps {

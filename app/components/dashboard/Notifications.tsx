@@ -1,7 +1,6 @@
 import { Fragment, useState, useEffect } from "react";
 import { Transition } from "@headlessui/react";
 import { HiOutlineX } from "react-icons/hi";
-import { set } from "react-hook-form";
 
 interface NotificationsProps {
   setCurrentNotification: React.Dispatch<React.SetStateAction<string>>;

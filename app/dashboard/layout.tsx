@@ -5,7 +5,7 @@ import * as IconAi from "react-icons/ai";
 import * as IconTb from "react-icons/tb";
 import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
 
 const navigation = [
   {
@@ -230,18 +230,22 @@ const UserLayout: FC<LayoutProps> = ({ children }) => {
                   <a href="#" className="flex-shrink-0 group block">
                     <div className="flex items-center">
                       <div>
-                        <img
-                          className="inline-block h-10 w-10 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
+                        <Image
+                          src="/images/profile.png"
+                          alt="Profile"
+                          height="40"
+                          width="40"
+                          className="inline-block rounded-full"
                         />
                       </div>
                       <div className="ml-3">
                         <p className="text-base font-medium text-gray-700 group-hover:text-gray-900 dark:text-darkText dark:group-hover:text-darkText">
-                          {session.data?.user?.name}
+                          <SessionProvider>
+                            {session.data?.user?.name}
+                          </SessionProvider>
                         </p>
                         <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700 dark:text-darkText dark:group-hover:text-darkText dark:hover:underline">
-                          Settings
+                          <Link href={"/dashboard/settings"}>Settings</Link>
                         </p>
                       </div>
                     </div>
@@ -379,10 +383,12 @@ const UserLayout: FC<LayoutProps> = ({ children }) => {
               <a href="#" className="flex-shrink-0 w-full group block">
                 <div className="flex items-center">
                   <div>
-                    <img
-                      className="inline-block h-9 w-9 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
+                    <Image
+                      src="/images/profile.png"
+                      alt="Profile"
+                      height="36"
+                      width="36"
+                      className="inline-block rounded-full"
                     />
                   </div>
                   <div className="ml-3">
@@ -390,7 +396,7 @@ const UserLayout: FC<LayoutProps> = ({ children }) => {
                       {session.data?.user?.name}
                     </p>
                     <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700 dark:text-darkText dark:group-hover:text-darkText dark:hover:underline">
-                      Settings
+                      <Link href={"/dashboard/settings"}>Settings</Link>
                     </p>
                   </div>
                 </div>
